@@ -1,0 +1,13 @@
+## VERSION 1.0.0 2021-12-08
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package -DskipTests
+
+FROM openjdk:11-jdk-slim
+
+COPY --from=build /home/app/target/products-catalog-0.0.1-SNAPSHOT.jar /usr/local/lib/products-catalog.jar
+
+
+EXPOSE 8080
+CMD ["java","-jar","/usr/local/lib/products-catalog.jar"]

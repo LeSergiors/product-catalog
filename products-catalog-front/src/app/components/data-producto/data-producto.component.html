@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{titulo}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="productoForm" name="productForm" id="productFormId" (ngSubmit)="enviarFormulario()">
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-lg-8 form-group">
+        <label for="sku">SKU</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">FAL-</div>
+          </div>
+          <input type="number" class="form-control" id="sku" placeholder="000000" formControlName="sku">
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6 form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6 form-group">
+        <label>Marca</label>
+        <input type="text" class="form-control" placeholder="Marca" formControlName="brand">
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6 form-group">
+        <label>Talla</label>
+        <input type="text" class="form-control" placeholder="Talla" formControlName="size">
+      </div>
+      <div class="form-group col-xs-12 col-md-6 col-lg-6">
+        <label>Precio</label>
+        <input type="number" class="form-control" placeholder="Precio" formControlName="price">
+      </div>
+    </div>
+  </form>
+  <div class="form-row align-items-center">
+    <div class="col-xs-12 col-md-8 col-lg-8 form-group">
+      <label>URL Imagen</label>
+      <input type="text" class="form-control" [(ngModel)]="urlImagen">
+    </div>
+    <div class="col-xs-12 col-md-4 col-lg-4 form-group mt-4">
+      <button class="btn btn-primary" (click)="agregarImagen()">Agregar</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th class="text-center" scope="col">Principal</th>
+          <th class="text-center" scope="col">Url</th>
+          <th class="text-center" scope="col">Imagen</th>
+          <th class="text-center" scope="col">Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of imagenes; index as imagenIndex">
+            <td class="text-center">
+              <input type="radio" class="custom-radio" name="principal" (change)="marcaPrincipal(i)" [checked]="i.principal">
+            </td>
+            <td>{{i.url}}</td>
+            <td><img alt="" [src]="i.url" class="img-thumbnail rounded" width="100" height="100"></td>
+            <td class="text-center">
+              <a [routerLink]="" ><fa-icon [icon]="faTrash" (click)="eliminarImagen(imagenIndex)"></fa-icon></a>
+            </td>
+          </tr>
+          <tr *ngIf="!imagenes.length">
+            <td colspan="4">No se han cargado imagenes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" [disabled]="!productoForm.valid" form="productFormId">Guardar</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')" form="productFormId">Close</button>
+</div>

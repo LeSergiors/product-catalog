@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 text-center">
+      <h2>Catalogo Productos.</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+      <h4>filtros</h4>
+    </div>
+  </div>
+    <div class="form-row align-items-center">
+      <div class="col-xs-12 col-md-4 col-lg-4 form-group">
+        <label for="sku">SKU</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">FAL-</div>
+          </div>
+          <input type="text" class="form-control" id="sku" placeholder="000000" [(ngModel)]="sku">
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-2 col-lg-2 form-group">
+        <button class="btn btn-primary mt-4" (click)="buscarPorSku()">Buscar</button>
+      </div>
+    </div>
+    <app-catalogo-grilla></app-catalogo-grilla>
+</div>
